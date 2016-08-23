@@ -14,9 +14,9 @@ The idea behind this is create your own classes where you want, but make them ex
 
 ```php
 <?php
-// src/Form/UserForm.php
+// src/Forms/UserForm.php
 
-namespace App\Form;
+namespace App\Forms;
 
 use Auburus\Form;
 use Respect\Validation as v;
@@ -43,7 +43,8 @@ And then, in your controller...
 
 namespace App\Controllers;
 
-use Auburus\Form;
+use App\Forms\UserForm;
+
 use Psr\Http\Message\RequestInterface;
 
 class UserController extends Controller
@@ -51,9 +52,9 @@ class UserController extends Controller
 // ...
 public action create()
 {
-    $form = Form::fromRequest(RequestInterface $request);
+    $form = UserForm::fromRequest(RequestInterface $request);
     // You can also force a specific HTTP Verb, to only retrieve params from there
-    $form = Form::fromRequest(RequestInterface $request, 'DELETE');
+    $form = UserForm::fromRequest(RequestInterface $request, 'DELETE');
     
     if (!$form->isValid()) {
         $errors = $form->getErrors(); //Array of errors, more info about this later
