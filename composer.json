@@ -1,6 +1,7 @@
 {
     "require": {
-        "respect/validation": "^1.1"
+        "respect/validation": "^1.1",
+        "psr/http-message": "^1.0"
     },
     "autoload": {
         "psr-4": {
