@@ -49,21 +49,22 @@ use Psr\Http\Message\RequestInterface;
 
 class UserController extends Controller
 {
-// ...
-public action create()
-{
-    $form = UserForm::fromRequest(RequestInterface $request);
-    // You can also force a specific HTTP Verb, to only retrieve params from there
-    $form = UserForm::fromRequest(RequestInterface $request, 'DELETE');
-    
-    if (!$form->isValid()) {
-        $errors = $form->getErrors(); //Array of errors, more info about this later
-        
-        //...
-    }
-    
-    $validAttributes = $form->getAttributes();
-    // Do something with them
     // ...
+    public action create()
+    {
+        $form = UserForm::fromRequest(RequestInterface $request);
+        // You can also force a specific HTTP Verb, to only retrieve params from there
+        $form = UserForm::fromRequest(RequestInterface $request, 'DELETE');
+        
+        if (!$form->isValid()) {
+            $errors = $form->getErrors(); //Array of errors, more info about this later
+            
+            //...
+        }
+        
+        $validAttributes = $form->getAttributes();
+        // Do something with them
+        // ...
+    }
 }
 ```
