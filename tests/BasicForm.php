@@ -3,7 +3,7 @@
 namespace Auburus\FormValidation\Tests;
 
 use Auburus\FormValidation\Form;
-use Respect\Validation as v;
+use Respect\Validation\Validator as v;
 
 class BasicForm extends Form
 {

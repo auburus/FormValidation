@@ -45,16 +45,14 @@ namespace App\Controllers;
 
 use App\Forms\UserForm;
 
-use Psr\Http\Message\RequestInterface;
-
 class UserController extends Controller
 {
     // ...
     public action create()
     {
-        $form = UserForm::fromRequest(RequestInterface $request);
+        $form = UserForm::fromRequest($request);
         // You can also force a specific HTTP Verb, to only retrieve params from there
-        $form = UserForm::fromRequest(RequestInterface $request, 'DELETE');
+        $form = UserForm::fromRequest($request, 'DELETE');
         
         if (!$form->isValid()) {
             $errors = $form->getErrors(); //Array of errors, more info about this later

@@ -22,9 +22,15 @@ class FormTest extends TestCase
     {
         $form = new BasicForm();
 
+        $this->assertNull($form->name);
+        $this->assertNull($form->password);
+        $this->assertNull($form->age);
+
+        /* I should use this, but doesn't respect magic methods
         $this->assertObjectHasAttribute('name', $form);
         $this->assertObjectHasAttribute('password', $form);
         $this->assertObjectHasAttribute('age', $form);
+         */
     }
 
     public function testGetAttributes()

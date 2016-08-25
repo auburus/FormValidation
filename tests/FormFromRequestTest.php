@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Auburus\FormValidation\Tests\BasicForm;
 use GuzzleHttp\Psr7\Request;
 
-class FormTest extends TestCase
+class FormFromTestRequest extends TestCase
 {
     public function testConstructFromRequest()
     {
