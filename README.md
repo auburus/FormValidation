@@ -67,28 +67,3 @@ class UserController extends Controller
 }
 ```
 
-## Prova de concepte
-
-```php
-<?php
-
-class BasicForm extends Form
-{
-    // Instead of defining propierties I've could have
-    // used reflection...
-    public $username;
-    public $password;
-    public $password2;
-    public $remindMe;
-
-    public function rules()
-    {
-        return [
-            'username' => v::notEmpty()->alnum()->noWhitespace(),
-            'password' => v::notEmpty()->length(8, 20),
-            'password2' => v::identical($this->password),
-            'remindMe' => v::boolVal(),
-        ];
-    }
-
-```

@@ -25,12 +25,6 @@ class FormTest extends TestCase
         $this->assertNull($form->name);
         $this->assertNull($form->password);
         $this->assertNull($form->age);
-
-        /* I should use this, but doesn't respect magic methods
-        $this->assertObjectHasAttribute('name', $form);
-        $this->assertObjectHasAttribute('password', $form);
-        $this->assertObjectHasAttribute('age', $form);
-         */
     }
 
     public function testGetAttributes()
@@ -48,5 +42,12 @@ class FormTest extends TestCase
         $this->assertSame(null, $attributes['name']);
         $this->assertSame('1234', $attributes['password']);
         $this->assertSame(null, $attributes['age']);
+    }
+
+    public function testSymfonyRequest()
+    {
+        $form = new BasicForm();
+
+        $form->populateFromSymfonyRequest(['holaaa']);
     }
 }
