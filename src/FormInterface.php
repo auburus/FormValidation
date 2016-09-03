@@ -9,4 +9,5 @@ interface FormInterface
     public function getAttributes();
     public function getErrors();
     public function isValid();
+    public static function fromRequest(RequestInterface $request);
 }

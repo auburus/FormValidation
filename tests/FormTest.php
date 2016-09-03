@@ -7,6 +7,8 @@ use Auburus\FormValidation\Tests\BasicForm;
 use Auburus\FormValidation\FormInterface;
 use Auburus\FormValidation\Form;
 
+use GuzzleHttp\Psr7\Request;
+
 class FormTest extends TestCase
 {
 
@@ -44,10 +46,29 @@ class FormTest extends TestCase
         $this->assertSame(null, $attributes['age']);
     }
 
-    public function testSymfonyRequest()
+    public function testFromGetRequest()
     {
-        $form = new BasicForm();
+        // The verb is not important
+        $request = new Request('DELETE', 'http://example.com/yeah?name=Jake&age=12');
 
-        $form->populateFromSymfonyRequest(['holaaa']);
+        $form = BasicForm::fromRequest($request);
+
+        $this->assertEquals('Jake', $form->name);
+        $this->assertNull($form->password);
+        $this->assertEquals('12', $form->age);
+    }
+
+    /**
+     * Check that only the attributes defined in rules
+     * are able to be populated from request
+     */
+    public function testAvoidOverridingProperties()
+    {
+        $request = new Request('GET', 'http://example.com/yeah?age=12&unpopulated=hello');
+
+        $form = BasicForm::fromRequest($request);
+
+        $this->assertNull($form->unpopulated);
+        $this->assertEquals('12', $form->age);
     }
 }

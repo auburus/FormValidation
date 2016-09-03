@@ -39,9 +39,24 @@ abstract class Form implements FormInterface
         }
     }
 
-    public function populateFromRequest(RequestInterface $request)
+    public static function fromRequest(RequestInterface $request)
     {
-        return null;
+        $form = new static();
+
+        $query = $request->getUri()->getQuery();
+        $queryParts = explode('&', $query);
+
+        $formAttributes = $form->getAttributes();
+
+        foreach($queryParts as $pair) {
+            list($queryParam, $queryValue) = explode('=', $pair);
+
+            if (array_key_exists($queryParam, $formAttributes)) {
+                $form->$queryParam = $queryValue;
+            }
+        }
+
+        return $form;
     }
 
     public function getAttributes()
