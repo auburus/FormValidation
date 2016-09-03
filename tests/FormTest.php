@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Auburus\FormValidation\Tests\BasicForm;
 use Auburus\FormValidation\FormInterface;
 use Auburus\FormValidation\Form;
+use Auburus\FormValidation\InvalidValidatorException;
 
 use GuzzleHttp\Psr7\Request;
 
@@ -70,5 +71,13 @@ class FormTest extends TestCase
 
         $this->assertNull($form->unpopulated);
         $this->assertEquals('12', $form->age);
+    }
+
+    public function testDetectInvalidRules()
+    {
+        $form = new InvalidForm;
+
+        $this->expectException(InvalidValidatorException::class);
+        $form->isValid();
     }
 }

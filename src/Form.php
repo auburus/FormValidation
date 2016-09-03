@@ -6,6 +6,7 @@ use Auburus\FormValidation\FormInterface;
 use Respect\Validation\Validator;
 use Psr\Http\Message\RequestInterface;
 use Illuminate\Http\Request;
+use Respect\Validation\Exceptions\NestedValidationException;
 
 abstract class Form implements FormInterface
 {
@@ -109,12 +110,12 @@ abstract class Form implements FormInterface
         // Reset errors for each validation
         $this->errors = [];
 
-        foreach ($this->getAttributes as $attrName => $value) {
+        foreach ($this->getAttributes() as $attrName => $value) {
             try {
                 $validator = $rules[$attrName];
                 if (!($validator instanceof Validator)) {
                     // TODO Change to concrete exception
-                    throw new Exception('The value in the rules array must be a valid validator object');
+                    throw new InvalidValidatorException('The value in the rules array must be a valid validator object');
                 }
                 $rules[$attrName]->assert($value);
             } catch (NestedValidationException $e) {
